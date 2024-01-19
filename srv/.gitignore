@@ -1,8 +1,11 @@
 .idea
 .env
 
+db.sqlite3
+
 __pycache__/*.pyc
 userauth/migrations
+products/migrations
 
 samridhhi/__pycache__/
 userauth/__pycache__/
