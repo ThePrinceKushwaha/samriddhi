@@ -7,6 +7,7 @@ import './index.css'
 import Producer from './pages/Producer.jsx'
 import WholeSeller from './pages/Wholeseller.jsx'
 import Retailer from './pages/Retailer.jsx'
+import SaleForm from './components/SaleForm.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/retailer",
     element: <Retailer />
+  },
+  {
+    path: "/SaleForm",
+    element: <SaleForm />
   }
 ])
 
