@@ -1,1 +1,8 @@
-.idea   
+.idea
+.env
+
+__pycache__/*.pyc
+userauth/migrations
+
+samridhhi/__pycache__/
+userauth/__pycache__/
