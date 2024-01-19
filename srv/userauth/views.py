@@ -14,6 +14,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.urls import reverse
+from samridhhi import settings
 from .models import User
 from .utils import Util
 from .permissions import IsVerified

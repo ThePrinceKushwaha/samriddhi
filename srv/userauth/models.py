@@ -15,6 +15,7 @@ def upload_to_user_avatars(instance, filename):
 
 class User(AbstractUser):
     email = models.EmailField(verbose_name="Email address", unique=True)
+    name = models.CharField(verbose_name="Name", max_length=255)
     ROLE_TYPES = (
         (0, "Producer"),
         (1, "Wholesaler"),
@@ -25,6 +26,10 @@ class User(AbstractUser):
     mobile_number = models.CharField(max_length=10, unique=True)
     address = models.CharField(max_length=255)
     is_verified = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     objects = UserManager()
 
     EMAIL_FIELD = "email"
