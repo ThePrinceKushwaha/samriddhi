@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import './App.css'
+import Homepage from './pages/Homepage.jsx'
+import About from './pages/About.jsx'
+import Footer from './pages/Footer.jsx'
 
 function App() {      
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello World!</h1>
+        <div className="container">
+            <Homepage/>
+            <About />
+            <Footer />
+        </div>
     </>
   )
 }
