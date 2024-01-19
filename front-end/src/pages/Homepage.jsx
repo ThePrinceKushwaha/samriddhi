@@ -1,10 +1,20 @@
-import React from 'react'
+import React from 'react';
+
+
+
 
 const Homepage = () => {
   return (
    <>
-  <h1>    Welcome to samriddhi    
-</h1>
+  <div className="container flex gap-5">
+      <div>
+col-1
+      </div>
+      <div>col-2</div>
+  </div>
+    <h2 className="text-white">
+    Welcome to samriddhi    
+    </h2>
    </>
   )
 }
