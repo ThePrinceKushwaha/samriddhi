@@ -18,6 +18,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to=upload_to_product_images, default=PRODUCT_IMG, null=True, blank=True)
+    expiry_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -5,6 +5,7 @@ from .views import (
     SellingTransactionListAPIView,
     BuyingTransactionListAPIView,
     ProductCreateAPIView,
+    CheckExpiryAPIView,
 )
 
 
@@ -15,4 +16,5 @@ urlpatterns = [
     path("<int:user_id>/buying/", BuyingTransactionListAPIView.as_view(), name='buying-transaction'),
 
     path('products/create/', ProductCreateAPIView.as_view(), name='product-create'),
+    path("check-expiry/", CheckExpiryAPIView.as_view(), name='check-expiry')
 ]

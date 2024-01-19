@@ -4,6 +4,14 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from .models import Transaction
 from .serializers import TransactionSerializer, ProductSerializer
+from .utils import check_and_notify_expiry
+
+
+class CheckExpiryAPIView(APIView):
+    permission_classes = [AllowAny, ]
+    def get(self, request, format=None):
+        check_and_notify_expiry.delay()
+        return Response({"message": "Expiry check initiated"}, status=status.HTTP_200_OK)
 
 
 class ProductCreateAPIView(APIView):
