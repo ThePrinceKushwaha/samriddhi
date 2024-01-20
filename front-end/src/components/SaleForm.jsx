@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from 'date-fns';
+import { useState } from "react";
 
 import Header from "./Header";
 
@@ -8,11 +9,36 @@ const SaleForm = () => {
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'MM/dd/yyyy');
 
+    const [formData, setFormData] = useState({
+        buyerName: '',
+        panNumber: '',
+        vatNumber: '',
+        address: '',
+        productName: '',
+        quantity: '',
+        metric: '',
+        rate: '',
+        expiryDate: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData)
+    }
+
     return (
         <>
             <Header />
             <div className="p-20">
-                <form className="w-full max-w-lg m-auto">
+                <form className="w-full max-w-lg m-auto" onSubmit={handleSubmit}>
                     <h1 className="text-lg font-bold my-5">Buyer Details</h1>
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full px-3">
@@ -23,7 +49,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" />
+                                type="text"
+                                name="buyerName"
+                                value={formData.buyerName}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -35,7 +66,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                type="text" />
+                                type="text"
+                                name="panNumber"
+                                value={formData.panNumber}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -43,7 +79,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" />
+                                type="text"
+                                name="vatNumber"
+                                value={formData.vatNumber}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-2">
@@ -55,7 +96,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" />
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label
@@ -95,7 +141,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" />
+                                type="text"
+                                name="productName"
+                                vlaue={formData.productName}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -110,11 +161,19 @@ const SaleForm = () => {
                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded-l py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-quantity"
                                     type="text"
+                                    name="quantity"
+                                    vlaue={formData.quantity}
+                                    onChange={handleChange}
+                                    required
                                     placeholder="Enter quantity"
                                 />
                                 <select
                                     className="block w-24 bg-gray-200 border border-l-0 border-gray-500 rounded-r py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-unit"
+                                    name="metric"
+                                    vlaue={formData.metric}
+                                    onChange={handleChange}
+                                    required
                                 >
                                     <option value="kg">KG</option>
                                     <option value="ton">Tons</option>
@@ -129,7 +188,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" />
+                                type="text" 
+                                name="rate"
+                                vlaue={formData.rate}
+                                onChange={handleChange}
+                                required
+                                />
                         </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-2">
@@ -137,11 +201,16 @@ const SaleForm = () => {
                             <label
                                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-city">
-                                Manufactured Date:
+                                Expiry Date:
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="date" />
+                                type="date" 
+                                name="expiryDate"
+                                vlaue={formData.expiryDate}
+                                onChange={handleChange}
+                                required
+                                />
                         </div>
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label
@@ -149,11 +218,11 @@ const SaleForm = () => {
                                 for="grid-city">
                                 Sell Date:
                             </label>
-                            <textarea
+                            <p
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 rows="1" readOnly>
                                 {formattedDate}
-                            </textarea>
+                            </p>
                         </div>
                     </div>
                     <button className="btn bg-green text-black py-2 px-4 rounded my-5">

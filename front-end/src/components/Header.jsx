@@ -27,7 +27,7 @@ const producer = [
 const Header = () => {
   return (
     <>
-     <div className="header w-full py-3 px-3 bg-gray-light rounded-lg shadow inline-flex flex-col items-center justify-center">
+     <div className="header w-full py-5 px-5 bg-gray-light rounded-lg shadow inline-flex flex-col items-center justify-center">
          <h1 className='text-3xl font-bold' >{producer[0].name}</h1>
          <p className='text-lg'>{producer[0].address}</p>
          <p>{producer[0].contact}</p>
