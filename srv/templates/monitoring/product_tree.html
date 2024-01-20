@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Tree</title>
+</head>
+<body>
+    <h1>Product Tree</h1>
+    <div id="product-tree">
+        {% for parent, children in tree.items %}
+            <div>
+                <p>Transaction: {{ parent.id }}</p>
+                {% if children %}
+                    <div class="children">
+                        {% include 'transaction_children.html' with transactions=children %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

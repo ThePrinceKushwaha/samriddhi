@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
 from datetime import timedelta
 from pathlib import Path
 from decouple import config
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 
     "userauth.apps.UserauthConfig",
     "products.apps.ProductsConfig",
+    "monitoring.apps.MonitoringConfig",
 
     "rest_framework",
     "rest_framework_simplejwt",
@@ -67,7 +69,7 @@ ROOT_URLCONF = 'samridhhi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

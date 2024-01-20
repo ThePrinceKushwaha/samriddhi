@@ -33,6 +33,7 @@ class Product(models.Model):
 
 class Transaction(models.Model):
     product = models.ForeignKey(Product, related_name="product", on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', related_name='child_transactions', null=True, blank=True, on_delete=models.CASCADE)
     seller = models.ForeignKey(User, related_name="seller_transaction", on_delete=models.CASCADE)
     buyer = models.ForeignKey(User, related_name="buyer_transaction", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
