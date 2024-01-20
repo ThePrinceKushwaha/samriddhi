@@ -1,0 +1,13 @@
+{% if nodes %}
+    <ul>
+        {% for node in nodes %}
+            <li>
+                {{ node.name }}
+                <!-- Here, you can add more details about the node -->
+                {% if node.children %}
+                    {% include 'monitoring/tree_structure.html' with nodes=node.children %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
