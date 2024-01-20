@@ -1,4 +1,5 @@
 import os
+import uuid
 from userauth.models import User
 from django.db import models
 
@@ -17,6 +18,7 @@ def upload_to_product_images(instance, filename):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    serial_number = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     image = models.ImageField(upload_to=upload_to_product_images, default=PRODUCT_IMG, null=True, blank=True)
     expiry_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
