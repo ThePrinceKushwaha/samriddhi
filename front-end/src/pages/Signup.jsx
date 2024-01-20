@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from 'styled-components';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -11,11 +12,6 @@ const Signup = () => {
     pan_number: "",
     password: "",
     address: "",
-    // repeatPassword: "",
-    // firstName: "",
-    // lastName: "",
-    // phone: "",
-    // company: "",
   });
 
   const handleChange = (e) => {
@@ -35,260 +31,160 @@ const Signup = () => {
 
   return (
     <>
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md">
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Name{" "}
-            <input
-              type="text"
-              name="uName"
-              id="name"
-              placeholder="Bishal Poudel"
-              value={formData.name}
-              onChange={handleChange}
-            />
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Name
           </label>
+          <input
+            type="text"
+            name="uName"
+            placeholder="Bishal Poudel"
+            value={formData.uName}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
+          />
         </div>
-        <div>
-          <label>
-            username{" "}
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="bishalpoudel12"
-              value={formData.userName}
-              onChange={handleChange}
-            />
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Username
           </label>
+          <input
+            type="text"
+            name="username"
+            placeholder="bishalpoudel12"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
+          />
         </div>
-        <div>
-          <label>
-            email{" "}
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="bishalpoudel12@gmail.com"
-              value={formData.email}
-              onChange={handleChange}
-            />
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Email
           </label>
-        </div>
-        <div>
-          <label>
-            password:{" "}
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="****************"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            phone{" "}
-            <input
-              type="text"
-              name="mobile_number"
-              id="mobile_number"
-              placeholder="+977-9845798672"
-              value={formData.mobile_number}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Business Name{" "}
-            <input
-              type="text"
-              name="businessName"
-              id="businessName"
-              placeholder="Samriddhi"
-              value={formData.businessName}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            PAN/VAT No.{" "}
-            <input
-              type="text"
-              name="pan_number"
-              id="pan_number"
-              placeholder="6875235697"
-              value={formData.pan_number}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Address{" "}
-            <input
-              type="text"
-              name="address"
-              id="address"
-              placeholder="Dharan"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        
-
-    <div>
-        <button type="submit" value="sign up">Register</button>
-    </div>
-      </form>
-
-      {/* <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
-        <div className="relative z-0 w-full mb-5 group">
           <input
             type="email"
-            name="floating_email"
-            id="floating_email"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
+            name="email"
+            placeholder="bishalpoudel12@gmail.com"
             value={formData.email}
             onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
           />
-          <label
-            for="floating_email"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Email address
-          </label>
         </div>
-        <div className="relative z-0 w-full mb-5 group">
-          <input
-            type="password"
-            name="floating_password"
-            id="floating_password"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <label
-            for="floating_password"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Password
           </label>
-        </div>
-        <div className="relative z-0 w-full mb-5 group">
           <input
             type="password"
-            name="repeat_password"
-            id="floating_repeat_password"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-            value={formData.repeatPassword}
+            name="password"
+            placeholder="****************"
+            value={formData.password}
             onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
           />
-          <label
-            for="floating_repeat_password"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Confirm password
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Phone
           </label>
+          <input
+            type="text"
+            name="mobile_number"
+            placeholder="+977-9845798672"
+            value={formData.mobile_number}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
+          />
         </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              type="text"
-              name="floating_first_name"
-              id="floating_first_name"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            <label
-              for="floating_first_name"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              First name
-            </label>
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <input
-              type="text"
-              name="floating_last_name"
-              id="floating_last_name"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-            <label
-              for="floating_last_name"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Last name
-            </label>
-          </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Business Name
+          </label>
+          <input
+            type="text"
+            name="businessName"
+            placeholder="Samriddhi"
+            value={formData.businessName}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
+          />
         </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              type="tel"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              name="floating_phone"
-              id="floating_phone"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-              value={formData.phone}
-              onChange={handleChange}
-            />
-            <label
-              for="floating_phone"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Phone number (123-456-7890)
-            </label>
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <input
-              type="text"
-              name="floating_company"
-              id="floating_company"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-              value={formData.company}
-              onChange={handleChange}
-            />
-            <label
-              for="floating_company"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Company (Ex. Google)
-            </label>
-          </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            PAN/VAT No.
+          </label>
+          <input
+            type="text"
+            name="pan_number"
+            placeholder="6875235697"
+            value={formData.pan_number}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
+          />
         </div>
-        <button
-          type="submit"
-          className="text-white bg-purple hover:bg-purple focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Submit
-        </button>
-      </form> */}
-    </>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Address
+          </label>
+          <input
+            type="text"
+            name="address"
+            placeholder="Dharan"
+            value={formData.address}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-md focus:outline-none focus:border-indigo-500"
+          />
+        </div>
+        <div>
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-purple text-white rounded-md hover:bg-indigo focus:outline-none focus:shadow-outline-indigo cursor-pointer"
+          >
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </>
   );
 };
+const SignupContainer = styled.div`
+  width: 400px; // Set a fixed width for the container
+  font-size: 1.2rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+    align-items:center;
+  }
+
+  label {
+    width: 100%; // Make labels take the full width
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+
+  input {
+    width: 100%; // Make input fields take the full width
+    outline: none;
+    padding: 8px;
+    border: 1px solid #0000000f;
+  }
+
+  button {
+    @apply bg-purple text-white px-4 py-2 rounded-md cursor-pointer;
+    margin-top: 14px; // Add margin between inputs and the button
+  }
+
+  button:hover {
+    @apply bg-indigo;
+  }
+`;
+
+
+
 
 export default Signup;

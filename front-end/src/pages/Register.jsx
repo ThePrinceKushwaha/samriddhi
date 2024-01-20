@@ -1,18 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import Login from './Login';
-import Signup from './Signup';
+import styled from 'styled-components'
 import Hero from './Hero';
-import Register from './Register';
+import { useLocation } from 'react-router-dom';
+import Signup from './Signup';
 
-const Homepage = () => {
+const Register = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-
   return (
     <>
-      <HomeContainer className="container xl">
+      <RegisterContainer className="container xl">
         <div className="homeWrapper flex items-center justify-center">
           <Hero />
           <ContentContainer>
@@ -22,20 +19,20 @@ const Homepage = () => {
                 <Login />
               </LoginContainer>
             )}
-            {currentPath === '/signup' && (
+            {currentPath === '/register' && (
               <SignupContainer>
                 <h2 className="signupText">Signup for an account</h2>
-                <Register />
+                <Signup />
               </SignupContainer>
             )}
           </ContentContainer>
         </div>
-      </HomeContainer>
+      </RegisterContainer>
     </>
   );
 };
 
-const HomeContainer = styled.div`
+const RegisterContainer = styled.div`
   margin: 0;
   padding: 0;
   .homeWrapper {
@@ -45,8 +42,9 @@ const HomeContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
+  width: 100%; // Make the container take up full width
+  max-width: 500px; // Set max-width if you want to limit the width
   padding-left: 200px;
-  width: 500px;
 `;
 
 const LoginContainer = styled.div`
@@ -63,4 +61,4 @@ const SignupContainer = styled.div`
   }
 `;
 
-export default Homepage;
+export default Register;

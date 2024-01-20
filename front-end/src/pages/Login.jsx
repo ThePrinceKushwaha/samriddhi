@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -62,9 +63,8 @@ const Login = () => {
                         >
                             Sign In
                         </button>
-                        <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-                            Forgot Password?
-                        </a>
+                            <Link to="/signup" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"> No Account yet? Register Now.</Link>
+                  
                     </div>
                 </form>
                 <p className="text-center text-gray-500 text-xs">
