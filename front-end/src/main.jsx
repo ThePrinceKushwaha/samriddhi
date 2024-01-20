@@ -10,6 +10,7 @@ import Retailer from './pages/Retailer.jsx'
 import SaleForm from './components/SaleForm.jsx'
 import BuyHistory from './components/BuyHistory.jsx'
 import SaleHistory from './components/SaleHistory.jsx'
+import AdminPage from './pages/admin.jsx'
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
   {
     path: "/retailer/saleform",
     element: <SaleForm />
+  },
+  {
+    path: "/wholeseller/saleform",
+    element: <SaleForm />
+  },
+  {
+    path: "/admin",
+    element: <AdminPage />
   }
 ])
 

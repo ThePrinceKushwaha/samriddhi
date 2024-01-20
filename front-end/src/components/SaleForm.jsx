@@ -4,8 +4,10 @@ import { format } from 'date-fns';
 import Header from "./Header";
 
 const SaleForm = () => {
+
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'MM/dd/yyyy');
+
     return (
         <>
             <Header />
