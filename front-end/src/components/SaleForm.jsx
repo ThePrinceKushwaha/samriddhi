@@ -126,4 +126,4 @@ const SaleForm = () => {
     )
 }
 
-export default SaleForm
+export default SaleForm;
