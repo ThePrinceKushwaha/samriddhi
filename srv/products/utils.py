@@ -6,13 +6,13 @@ from .models import Product, Transaction
 
 def check_and_notify_expiry():
     today = timezone.now()
-    warning_days = 7
+    warning_days = 10
     near_expiry_products = Product.objects.filter(
-        expiry_date__lte=today + timezone.timedelta(days=warning_days),
-        in_stock=True
+        expiry_date__lte=today + timezone.timedelta(days=warning_days)
     )
 
     for product in near_expiry_products:
+        # Get the email of the most recent buyer of this product
         recipient_email = Transaction.objects.filter(
             product=product).order_by('-transaction_date').values_list('buyer__email', flat=True).first()
 
@@ -24,4 +24,3 @@ def check_and_notify_expiry():
                 recipient_list=[recipient_email],
                 fail_silently=False,
             )
-
