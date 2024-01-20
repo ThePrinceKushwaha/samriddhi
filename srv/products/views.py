@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -7,11 +8,9 @@ from .serializers import TransactionSerializer, ProductSerializer
 from .utils import check_and_notify_expiry
 
 
-class CheckExpiryAPIView(APIView):
-    permission_classes = [AllowAny, ]
-    def get(self, request, format=None):
-        check_and_notify_expiry.delay()
-        return Response({"message": "Expiry check initiated"}, status=status.HTTP_200_OK)
+def expiry_check_view(request):
+    check_and_notify_expiry()
+    return JsonResponse({"message": "Expiry check process initiated."})
 
 
 class ProductCreateAPIView(APIView):
