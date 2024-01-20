@@ -68,7 +68,7 @@ class TransactionListAPIView(APIView):
     # permission_classes = (AllowAny,)
     permission_classes = [IsAuthenticated, ]
 
-    def get(self, request, user_id):
+    def get(self, request):
         user_id = self.request.user.id
         transactions = Transaction.objects.filter(buyer=user_id) | Transaction.objects.filter(seller=user_id)
         serializer = TransactionSerializer(transactions, many=True)
