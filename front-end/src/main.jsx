@@ -15,6 +15,7 @@ import { createBrowserRouter,RouterProvider } from "react-router-dom";
 import Homepage from "./pages/Homepage.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  }
+  ,{
+    path:"/dashboard",
+    element: <Dashboard />
   }
   /* <Routes>
   <Route path="/" element= {<Homepage />}></Route>
