@@ -15,12 +15,35 @@ const SaleForm = () => {
     const userInfo = location.state?.userInfo;
     // console.log(userInfo)
 
+    // const [ productData, setProductData ] = useState({
+    //     productName: '',
+    //     productDesc: '',
+    //     expiryDate: ''
+    // })
+
+    // const [transactionData, setTransactionData] = useState({
+    //     productId: '',
+    //     sellerName: '',
+    //     buyerId: '',
+    //     panNumber: '',
+    //     vatNumber: '',
+    //     address: '',
+    //     productName: '',
+    //     productDesc: '',
+    //     quantity: '',
+    //     metric: '',
+    //     rate: '',
+    //     expiryDate: ''
+    // })
+
+
     const [formData, setFormData] = useState({
         buyerName: '',
         panNumber: '',
         vatNumber: '',
         address: '',
         productName: '',
+        productDesc: '',
         quantity: '',
         metric: '',
         rate: '',
@@ -35,9 +58,15 @@ const SaleForm = () => {
         });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault();
         console.log(formData)
+       
+        try{
+            const reponse = await axios('', formData)
+        } catch(error){
+
+        }
     }
 
     return (
@@ -149,7 +178,22 @@ const SaleForm = () => {
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text"
                                 name="productName"
-                                vlaue={formData.productName}
+                                value={formData.productName}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="w-full px-3">
+                            <label
+                                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-password">
+                                Product Description:
+                            </label>
+                            <input
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                type="text"
+                                name="productDesc"
+                                value={formData.productDesc}
                                 onChange={handleChange}
                                 required
                             />
@@ -168,7 +212,7 @@ const SaleForm = () => {
                                     id="grid-quantity"
                                     type="text"
                                     name="quantity"
-                                    vlaue={formData.quantity}
+                                    value={formData.quantity}
                                     onChange={handleChange}
                                     required
                                     placeholder="Enter quantity"
@@ -177,7 +221,7 @@ const SaleForm = () => {
                                     className="block w-24 bg-gray-200 border border-l-0 border-gray-500 rounded-r py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-unit"
                                     name="metric"
-                                    vlaue={formData.metric}
+                                    value={formData.metric}
                                     onChange={handleChange}
                                     required
                                 >
@@ -196,7 +240,7 @@ const SaleForm = () => {
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text" 
                                 name="rate"
-                                vlaue={formData.rate}
+                                value={formData.rate}
                                 onChange={handleChange}
                                 required
                                 />
@@ -213,7 +257,7 @@ const SaleForm = () => {
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="date" 
                                 name="expiryDate"
-                                vlaue={formData.expiryDate}
+                                value={formData.expiryDate}
                                 onChange={handleChange}
                                 required
                                 />

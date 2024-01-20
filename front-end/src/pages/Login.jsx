@@ -28,7 +28,7 @@ const Login = () => {
         console.log('Form Data:', formData);
         try {
             const response = await axios.post('http://localhost:8000/api/v1/userauth/login/', formData)
-            console.log('Login successfull: ', response.data)
+            console.log('Login successful: ', response.data)
             const token = response.data.tokens.access
             const role = response.data.role
             Cookies.set('jwt', token, { expires: 1 })
