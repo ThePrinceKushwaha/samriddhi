@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+// name, email, username, role , mobile_number, pan_number, address, password
+
+    uName: "",
     email: "",
+    username: "",
+    mobile_number:"",
+    pan_number: "",
     password: "",
-    repeatPassword: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    company: "",
+    address: "",
+    // repeatPassword: "",
+    // firstName: "",
+    // lastName: "",
+    // phone: "",
+    // company: "",
   });
 
   const handleChange = (e) => {
@@ -28,12 +35,118 @@ const Signup = () => {
 
   return (
     <>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>
+            Name{" "}
+            <input
+              type="text"
+              name="uName"
+              id="name"
+              placeholder="Bishal Poudel"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            username{" "}
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="bishalpoudel12"
+              value={formData.userName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            email{" "}
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="bishalpoudel12@gmail.com"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            password:{" "}
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="****************"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            phone{" "}
+            <input
+              type="text"
+              name="mobile_number"
+              id="mobile_number"
+              placeholder="+977-9845798672"
+              value={formData.mobile_number}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Business Name{" "}
+            <input
+              type="text"
+              name="businessName"
+              id="businessName"
+              placeholder="Samriddhi"
+              value={formData.businessName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            PAN/VAT No.{" "}
+            <input
+              type="text"
+              name="pan_number"
+              id="pan_number"
+              placeholder="6875235697"
+              value={formData.pan_number}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
 
+        <div>
+          <label>
+            Address{" "}
+            <input
+              type="text"
+              name="address"
+              id="address"
+              placeholder="Dharan"
+              value={formData.address}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        
 
-<form  >
-
-
-</form>
+    <div>
+        <button type="submit" value="sign up">Register</button>
+    </div>
+      </form>
 
       {/* <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
         <div className="relative z-0 w-full mb-5 group">
