@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Transaction
 from .serializers import TransactionSerializer, ProductSerializer
 from .utils import check_and_notify_expiry
@@ -14,8 +14,8 @@ def expiry_check_view(request):
 
 
 class ProductCreateAPIView(APIView):
-    # permission_classes = [IsAuthenticated, IsProducer]
-    permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated, ]
+    # permission_classes = (AllowAny,)
 
     def post(self, request, format=None):
         serializer = ProductSerializer(data=request.data)
@@ -27,30 +27,33 @@ class ProductCreateAPIView(APIView):
 
 
 class SellingTransactionListAPIView(APIView):
-    permission_classes = (AllowAny,)
-    def get(self, request, user_id, format=None):
-        # Retrieve transactions where the user is the seller
+    permission_classes = [IsAuthenticated, ]
+    # permission_classes = (AllowAny,)
+
+    def get(self, request, format=None):
+        user_id = self.request.user.id
         transactions = Transaction.objects.filter(seller=user_id)
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class BuyingTransactionListAPIView(APIView):
-    permission_classes = (AllowAny,)
-    def get(self, request, user_id, format=None):
-        # Retrieve transactions where the user is the buyer
+    # permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request, format=None):
+        user_id = self.request.user.id
         transactions = Transaction.objects.filter(buyer=user_id)
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class TransactionCreateAPIView(APIView):
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated, ]
 
-    def post(self, request, user_id, format=None):
-        # Set the current user as the seller
-        request.data['seller'] = user_id
-        # request.data['seller'] = request.user.id
+    def post(self, request, format=None):
+        request.data['seller'] = self.request.user.id
 
         # Create a transaction with the provided data
         serializer = TransactionSerializer(data=request.data)
@@ -62,9 +65,11 @@ class TransactionCreateAPIView(APIView):
 
 
 class TransactionListAPIView(APIView):
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated, ]
 
-    def get(self, request, user_id):
+    def get(self, request):
+        user_id = self.request.user.id
         transactions = Transaction.objects.filter(buyer=user_id) | Transaction.objects.filter(seller=user_id)
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

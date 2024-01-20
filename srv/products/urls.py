@@ -10,11 +10,11 @@ from .views import (
 
 
 urlpatterns = [
-    path('<int:user_id>/', TransactionListAPIView.as_view(), name='transaction-list'),
-    path("<int:user_id>/create/", TransactionCreateAPIView.as_view(), name='create-transaction'),
-    path("<int:user_id>/selling/", SellingTransactionListAPIView.as_view(), name='selling-transaction'),
-    path("<int:user_id>/buying/", BuyingTransactionListAPIView.as_view(), name='buying-transaction'),
+    path("", TransactionListAPIView.as_view(), name='transaction-list'),
+    path("create-transaction/", TransactionCreateAPIView.as_view(), name='create-transaction'),
+    path("selling/", SellingTransactionListAPIView.as_view(), name='selling-transaction'),
+    path("buying/", BuyingTransactionListAPIView.as_view(), name='buying-transaction'),
 
-    path('products/create/', ProductCreateAPIView.as_view(), name='product-create'),
+    path('create-product/', ProductCreateAPIView.as_view(), name='product-create'),
     path("check-expiry/", expiry_check_view, name='check-expiry')
 ]
