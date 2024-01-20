@@ -13,7 +13,7 @@ Food supply chain tracking and logging system with a focus on reducing food wast
 
 ## GETTING STARTED
 0. Clone the project in your machine
-1. There is client side code in front-end directory(React, TypeScript)
+1. There is client side code in client branch(React, TypeScript)
 2. Server side code is in srv directory(Python, Django Rest Framework)
 3. Start server side code using command either
     ```pip install -r requirements.txt, python manage.py makemigrations, python manage.py migrate and python manage.py runserver``` in virtual environment
