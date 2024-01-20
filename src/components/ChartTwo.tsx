@@ -76,10 +76,10 @@ const ChartTwo: React.FC = () => {
         name: 'Sales',
         data: [44, 55, 41, 67, 22, 43, 65],
       },
-      {
-        name: 'Revenue',
-        data: [13, 23, 20, 8, 13, 27, 15],
-      },
+      // {
+      //   name: 'Revenue',
+      //   data: [13, 23, 20, 8, 13, 27, 15],
+      // },
     ],
   });
 

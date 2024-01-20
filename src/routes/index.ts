@@ -1,4 +1,9 @@
 import { lazy } from 'react';
+import ProductHistory from '../pages/ProductHistory';
+import SalesHistory from '../pages/SalesHistory';
+import SalesHistoryTable from '../components/SalesHistoryTable';
+import SalesForm from '../pages/Form/SalesForm';
+import ContactForm from '../pages/Form/ContactForm';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
@@ -22,15 +27,43 @@ const coreRoutes = [
     component: Profile,
   },
   {
+    path: '/forms/sales-form',
+    title: 'Sales Form',
+    component: SalesForm ,
+  }
+  ,
+  {
     path: '/forms/form-elements',
     title: 'Forms Elements',
     component: FormElements,
+  },
+  {
+    path: '/forms/contact-form',
+    title: 'Contact Form',
+    component: ContactForm,
   },
   {
     path: '/forms/form-layout',
     title: 'Form Layouts',
     component: FormLayout,
   },
+  {
+    path:'/productHistory',
+    title: 'Product History',
+    component: ProductHistory,
+  },
+  {
+    path:'/salesHistory',
+    title: 'Sales History',
+    component: SalesHistory,
+  },
+
+  {
+    path:"/salesHistoryTable",
+    title: "Sales History Table",
+    component: SalesHistoryTable,
+  }
+  ,
   {
     path: '/tables',
     title: 'Tables',

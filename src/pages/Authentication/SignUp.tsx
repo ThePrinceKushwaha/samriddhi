@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import LogoDark from '../../images/logo/logo-dark.svg';
-import Logo from '../../images/logo/logo.svg';
+import LogoDark from '../../images/logo/samriddhi.png';
+import Logo from '../../images/logo/samriddhi.png';
 
 const SignUp = () => {
   return (
