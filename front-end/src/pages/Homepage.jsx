@@ -22,7 +22,7 @@ const Homepage = () => {
                 <Login />
               </LoginContainer>
             )}
-            {currentPath === '/signup' && (
+            {currentPath === '/register' && (
               <SignupContainer>
                 <h2 className="signupText">Signup for an account</h2>
                 <Register />
