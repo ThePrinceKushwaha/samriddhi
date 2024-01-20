@@ -2,76 +2,92 @@ import React from "react";
 import { format } from 'date-fns';
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
+import axios from 'axios'
+import Cookies from 'js-cookie';
+
+
 
 import Header from "./Header";
 
 const SaleForm = () => {
 
-    // console.log(props)
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'MM/dd/yyyy');
 
     const location = useLocation();
     const userInfo = location.state?.userInfo;
-    // console.log(userInfo)
 
-    // const [ productData, setProductData ] = useState({
-    //     productName: '',
-    //     productDesc: '',
-    //     expiryDate: ''
-    // })
+    const [productId, setProductId] = useState()
 
-    // const [transactionData, setTransactionData] = useState({
-    //     productId: '',
-    //     sellerName: '',
-    //     buyerId: '',
-    //     panNumber: '',
-    //     vatNumber: '',
-    //     address: '',
-    //     productName: '',
-    //     productDesc: '',
-    //     quantity: '',
-    //     metric: '',
-    //     rate: '',
-    //     expiryDate: ''
-    // })
-
-
-    const [formData, setFormData] = useState({
-        buyerName: '',
-        panNumber: '',
-        vatNumber: '',
-        address: '',
-        productName: '',
-        productDesc: '',
-        quantity: '',
-        metric: '',
-        rate: '',
-        expiryDate: ''
+    const [productData, setProductData] = useState({
+        name: '',
+        description: '',
+        expiry_date: ''
     })
 
-    const handleChange = (e) => {
+    const [transactionData, setTransactionData] = useState({
+        buyer: '',
+        price: '',
+    })
+
+
+    const handleProductChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setProductData({
+            ...productData,
             [name]: value,
         });
+
     }
 
-    const handleSubmit =  async (e) => {
-        e.preventDefault();
-        console.log(formData)
-       
-        try{
-            const reponse = await axios('', formData)
-        } catch(error){
+    const handleTransactionChange = (e) => {
+        const { name, value } = e.target;
+        setTransactionData({
+            ...transactionData,
+            [name]: value,
+        })
+    }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(transactionData)
+        console.log(productData)
+
+        try {
+            const token = Cookies.get('jwt');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            const response = await axios.post('http://localhost:8000/api/v1/products/create-product/', productData, config)
+            console.log("response: ", response)
+            console.log("product id: ", response.data.id)
+            const productId = response.data.id;
+            setProductId(productId);
+
+        } catch (error) {
+            console.log("error: " + error)
+        }
+
+        const updatedTransactionData = {
+            ...transactionData,
+            product: productId
+        };
+
+        try {
+            const token = Cookies.get('jwt');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            const response = await axios.post('http://localhost:8000/api/v1/products/create-transaction/', updatedTransactionData, config)
+            console.log("response: ", response)
+        } catch (error) {
+            console.log("error: " + error)
         }
     }
 
     return (
         <>
-            <Header props={userInfo}/>
+            <Header props={userInfo} />
             <div className="p-20">
                 <form className="w-full max-w-lg m-auto" onSubmit={handleSubmit}>
                     <h1 className="text-lg font-bold my-5">Buyer Details</h1>
@@ -85,9 +101,9 @@ const SaleForm = () => {
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text"
-                                name="buyerName"
-                                value={formData.buyerName}
-                                onChange={handleChange}
+                                // name="buyer"
+                                // value={transactionData.buyername}
+                                onChange={handleTransactionChange}
                                 required
                             />
                         </div>
@@ -97,14 +113,29 @@ const SaleForm = () => {
                             <label
                                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-first-name">
+                                Buyer Id:
+                            </label>
+                            <input
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="number"
+                                name="buyer"
+                                value={transactionData.buyer}
+                                onChange={handleTransactionChange}
+                                required
+                            />
+                        </div>
+                        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-first-name">
                                 PAN No:
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 type="text"
-                                name="panNumber"
-                                value={formData.panNumber}
-                                onChange={handleChange}
+                                // name="panNumber"
+                                // value={transactionData.panNumber}
+                                onChange={handleTransactionChange}
                                 required
                             />
                         </div>
@@ -115,9 +146,9 @@ const SaleForm = () => {
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text"
-                                name="vatNumber"
-                                value={formData.vatNumber}
-                                onChange={handleChange}
+                                // name="vatNumber"
+                                // value={transactionData.vatNumber}
+                                onChange={handleTransactionChange}
                                 required
                             />
                         </div>
@@ -132,9 +163,9 @@ const SaleForm = () => {
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text"
-                                name="address"
-                                value={formData.address}
-                                onChange={handleChange}
+                                // name="address"
+                                // value={transactionData.address}
+                                onChange={handleTransactionChange}
                                 required
                             />
                         </div>
@@ -177,9 +208,9 @@ const SaleForm = () => {
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text"
-                                name="productName"
-                                value={formData.productName}
-                                onChange={handleChange}
+                                name="name"
+                                value={productData.name}
+                                onChange={handleProductChange}
                                 required
                             />
                         </div>
@@ -192,9 +223,9 @@ const SaleForm = () => {
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 type="text"
-                                name="productDesc"
-                                value={formData.productDesc}
-                                onChange={handleChange}
+                                name="description"
+                                value={productData.description}
+                                onChange={handleProductChange}
                                 required
                             />
                         </div>
@@ -212,8 +243,8 @@ const SaleForm = () => {
                                     id="grid-quantity"
                                     type="text"
                                     name="quantity"
-                                    value={formData.quantity}
-                                    onChange={handleChange}
+                                    value={transactionData.quantity}
+                                    onChange={handleTransactionChange}
                                     required
                                     placeholder="Enter quantity"
                                 />
@@ -221,8 +252,8 @@ const SaleForm = () => {
                                     className="block w-24 bg-gray-200 border border-l-0 border-gray-500 rounded-r py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-unit"
                                     name="metric"
-                                    value={formData.metric}
-                                    onChange={handleChange}
+                                    value={transactionData.metric}
+                                    onChange={handleTransactionChange}
                                     required
                                 >
                                     <option value="kg">KG</option>
@@ -238,12 +269,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" 
-                                name="rate"
-                                value={formData.rate}
-                                onChange={handleChange}
+                                type="text"
+                                name="price"
+                                value={transactionData.price}
+                                onChange={handleTransactionChange}
                                 required
-                                />
+                            />
                         </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-2">
@@ -255,12 +286,12 @@ const SaleForm = () => {
                             </label>
                             <input
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="date" 
-                                name="expiryDate"
-                                value={formData.expiryDate}
-                                onChange={handleChange}
+                                type="date"
+                                name="expiry_date"
+                                value={productData.expiry_date}
+                                onChange={handleProductChange}
                                 required
-                                />
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label
