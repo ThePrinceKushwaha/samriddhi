@@ -18,7 +18,7 @@ def upload_to_product_images(instance, filename):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    serial_number = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    serial_number = models.UUIDField(default=uuid.uuid4, unique=True)
     image = models.ImageField(upload_to=upload_to_product_images, default=PRODUCT_IMG, null=True, blank=True)
     expiry_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,7 +28,7 @@ class Product(models.Model):
         db_table = "Products_samriddhi"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}_{self.serial_number}"
 
 
 class Transaction(models.Model):
@@ -44,4 +44,4 @@ class Transaction(models.Model):
         db_table = "Transactions_samriddhi"
 
     def __str__(self):
-        return f"{self.product} by {self.seller.name} to {self.buyer.name}"
+        return f"{self.product}_{self.product.serial_number} from [{self.seller.name}] to [{self.buyer.name}]"
