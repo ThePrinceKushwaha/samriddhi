@@ -1,13 +1,19 @@
 import React from "react";
 import { format } from 'date-fns';
 import { useState } from "react";
+import { useLocation } from 'react-router-dom';
 
 import Header from "./Header";
 
 const SaleForm = () => {
 
+    // console.log(props)
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'MM/dd/yyyy');
+
+    const location = useLocation();
+    const userInfo = location.state?.userInfo;
+    // console.log(userInfo)
 
     const [formData, setFormData] = useState({
         buyerName: '',
@@ -36,7 +42,7 @@ const SaleForm = () => {
 
     return (
         <>
-            <Header />
+            <Header props={userInfo}/>
             <div className="p-20">
                 <form className="w-full max-w-lg m-auto" onSubmit={handleSubmit}>
                     <h1 className="text-lg font-bold my-5">Buyer Details</h1>

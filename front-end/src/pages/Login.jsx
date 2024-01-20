@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios'
+import Cookies from 'js-cookie';
+
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,11 +22,26 @@ const Login = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Access the form data here using the formData state
         console.log('Form Data:', formData);
-        navigate('/producer ')
+        try {
+            const response = await axios.post('http://localhost:8000/api/v1/userauth/login/', formData)
+            console.log('Login successfull: ', response.data)
+            const token = response.data.tokens.access
+            const role = response.data.role
+            Cookies.set('jwt', token, { expires: 1 })
+
+            if (role == 0)
+                navigate('/producer ')
+            else if (role == 1)
+                navigate('/wholeseller')
+            else
+                navigate('/retailer')
+        } catch (error) {
+            console.log('Login error: ', error.response)
+        }
         // You can perform further actions, such as sending the data to a server
     };
 
